@@ -1,0 +1,52 @@
+﻿@page "/Usage"
+@using WebApplication6.Models
+@layout Layout2
+<link rel="stylesheet" href="/css/new.css" />
+<div class="texth">
+    <h1>Employee Details</h1>
+</div>
+
+<div class="main-w3layouts-agileinfo11">
+    <div class="button">
+        <p>
+            <NavLink href="/CreateUsage">New Record</NavLink>
+        </p>
+    </div>
+
+    <table class="wthree-form">
+        <thead>
+            <tr>
+                <th>
+                    disc
+                </th>
+                <th>
+                    otherdetails
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in EmployeeList)
+            {
+                <tr>
+                    <td>
+                        @item.disc
+                    </td>
+                    <td>
+                        @item.otherdetails
+                    </td>
+                    <td>
+                        <a href="/Edit/@item.drugcondID">Edit</a> |
+                        <a href="/Details/@item.drugcondID">Details</a> |
+                        <a href="/Delete/@item.drugcondID">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+@code {
+    // Assuming you have a property named EmployeeList in the code-behind
+    private List<usagecs> EmployeeList { get; set; } = new List<usagecs>();
+}
+

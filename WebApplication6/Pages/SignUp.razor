@@ -1,0 +1,88 @@
+﻿@page "/signup"
+@using WebApplication6.Models
+@layout Layout1
+<div class="header-w3l">
+    <!-- Header content, if any -->
+</div>
+
+<!-- Main content -->
+<div class="main-w3layouts-agileinfo1">
+    <div class="wthree-form">
+        <div id="login">
+            <p> Sign Up Form</p>
+        </div>
+
+        <EditForm Model="@signupModel" OnValidSubmit="HandleValidSubmit">
+            <DataAnnotationsValidator />
+
+            <div class="form-sub-w4">
+
+                <label for="firstname" class="control-label">First Name</label>
+                <input type="text" @bind="signupModel.FirstName" class="form-control" />
+                <ValidationMessage For="@(() => signupModel.FirstName)" class="text-danger" />
+            </div>
+
+            <div class="form-sub-w4">
+                <label for="LastName" class="control-label">Last Name</label>
+                <input type="text" @bind="signupModel.LastName" class="form-control" />
+                <ValidationMessage For="@(() => signupModel.LastName)" class="text-danger" />
+            </div>
+
+            <div class="form-sub-w4">
+                <label for="username" class="control-label">Username</label>
+                <input type="text" @bind="signupModel.username" class="form-control" />
+                <ValidationMessage For="@(() => signupModel.username)" class="text-danger" />
+            </div>
+
+            <div class="form-sub-w4">
+                <label for="Password" class="control-label">Password</label>
+                <input type="password" @bind="signupModel.Password" class="form-control" />
+                <ValidationMessage For="@(() => signupModel.Password)" class="text-danger" />
+            </div>
+
+            <div class="form-sub-w4">
+                <label for="Confirmpwd" class="control-label">Confirm Password</label>
+                <input type="password" @bind="signupModel.Confirmpwd" class="form-control" />
+                <ValidationMessage For="@(() => signupModel.Confirmpwd)" class="text-danger" />
+            </div>
+
+            <div class="form-sub-w5">
+                <label for="Email" class="control-label">Email</label>
+                <input type="email" @bind="signupModel.Email" class="form-control" />
+                <ValidationMessage For="@(() => signupModel.Email)" class="text-danger" />
+            </div>
+
+            <div class="form-sub-w5">
+                <label for="PhoneNumber" class="control-label">Phone Number</label>
+                <input type="number" @bind="signupModel.PhoneNumber" class="form-control" />
+                <ValidationMessage For="@(() => signupModel.PhoneNumber)" class="text-danger" />
+            </div>
+
+            
+            <div class="form-sub-w5">
+                <label for="Gender" class="control-label">Gender</label>
+                <select class="form-control" @bind="signupModel.Gender">
+                    <option value="">Select Gender</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                </select>
+                <ValidationMessage For="@(() => signupModel.Gender)" class="text-danger" />
+            </div>
+            <div class="submit-agileits">
+                <button type="submit" class="btn btn-primary">SignUp</button>
+            </div>
+        </EditForm>
+
+        <div id="register">
+            <a href="/">Back to Login</a>
+        </div>
+    </div>
+</div>
+@code{
+
+    registration signupModel = new registration();
+    void HandleValidSubmit()
+    {
+        register.signup(signupModel);
+    }
+}

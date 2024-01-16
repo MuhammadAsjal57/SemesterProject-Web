@@ -1,0 +1,88 @@
+﻿@inherits LayoutComponentBase
+
+<PageTitle>WebApplication6</PageTitle>
+<link href="/css/style1.css" rel='stylesheet' type='text/css' />
+<link href="/css/style-responsive.css" rel="stylesheet" />
+<section id="container">
+
+    <header class="header fixed-top clearfix" style="background: linear-gradient(90deg, rgba(0, 189, 255, 0.53), rgba(0, 0, 0, 0.8)), url(../rm373batch15-217-01.jpg) no-repeat 0px 0px; background-size:cover;">
+        <div class="brand">
+            <a href="#" class="logo">
+                Admin
+            </a>
+            <div class="sidebar-toggle-box">
+                <div class="fa fa-bars"></div>
+            </div>
+        </div>
+        <div id="text" style="margin-top:20px;">
+            <h1 style="color:white; text-align:center;">
+                Drug Management System
+            </h1>
+        </div>
+    </header>
+
+    <!--sidebar start-->
+    <aside>
+        <div id="sidebar" class="nav-collapse">
+            <div class="leftside-navigation">
+                <ul class="sidebar-menu" id="nav-accordion">
+                    <li>
+                        <NavLink href="/employes">
+                            <i class="fa fa-dashboard"></i>
+                            <span>Employe Details</span>
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink href="/DrugRegistration">
+                            <i class="fa fa-bullhorn"></i>
+                            <span>Drug Registrations</span>
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink href="/Usage">
+                            <i class="fa fa-bullhorn"></i>
+                            <span>Usage Condition</span>
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink href="/Agent">
+                            <i class="fa fa-bullhorn"></i>
+                            <span>Reaction Agent Details</span>
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink href="/AlergicSymp">
+                            <i class="fa fa-bullhorn"></i>
+                            <span>Allergic Symptoms</span>
+                        </NavLink>
+                    </li>
+
+                </ul>
+            </div>
+            <!-- sidebar menu end-->
+        </div>
+    </aside>
+    <!--sidebar end-->
+    <!--main content start-->
+    <section id="main-content">
+        <section class="wrapper">
+            @Body
+            <div class="row">
+                <div class="panel-body">
+                    <div class="col-md-12 w3ls-graph">
+                        <!-- Additional content or components can be added here -->
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- footer -->
+        <div class="footer">
+            <div class="wthree-copyright">
+               
+            </div>
+        </div>
+        <!-- / footer -->
+    </section>
+    <!--main content end-->
+
+</section>

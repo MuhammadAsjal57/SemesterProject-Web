@@ -1,0 +1,52 @@
+﻿@page "/AlergicSymp"
+@using WebApplication6.Models
+@layout Layout2
+<link rel="stylesheet" href="/css/new.css" />
+<div class="texth">
+    <h1>Employee Details</h1>
+</div>
+
+<div class="main-w3layouts-agileinfo11">
+    <div class="button">
+        <p>
+            <NavLink href="/CreateAllergicSymp">New Record</NavLink>
+        </p>
+    </div>
+
+    <table class="wthree-form">
+        <thead>
+            <tr>
+                <th>
+                    name
+                </th>
+                <th>
+                    desc
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in EmployeeList)
+            {
+                <tr>
+                    <td>
+                        @item.Name
+                    </td>
+                    <td>
+                        @item.disc
+                    </td>
+                    <td>
+                        <a href="/Edit/@item.drugID">Edit</a> |
+                        <a href="/Details/@item.drugID">Details</a> |
+                        <a href="/Delete/@item.drugID">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+@code {
+    // Assuming you have a property named EmployeeList in the code-behind
+    private List<alergic> EmployeeList { get; set; } = new List<alergic>();
+}
+

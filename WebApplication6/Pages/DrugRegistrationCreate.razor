@@ -1,0 +1,66 @@
+﻿@page "/CreateRegistration"
+@using WebApplication6.Models
+@layout Layout2
+<link rel="stylesheet" href="/css/new.css" />
+<h1>Create</h1>
+
+<h4>Registration</h4>
+<hr />
+
+<div class="row">
+    <div class="col-md-4">
+        <form method="post" @onsubmit="Create">
+            <div class="form-group">
+                <label for="FirstName" class="control-label">First Name</label>
+                <input id="FirstName" @bind="@Model.FirstName" class="form-control" />
+                <span class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="LastName" class="control-label">Last Name</label>
+                <input id="LastName" @bind="@Model.LastName" class="form-control" />
+                <span class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="Password" class="control-label">Password</label>
+                <input id="Password" @bind="@Model.Password" class="form-control" />
+                <span class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="Confirmpwd" class="control-label">Confirm Password</label>
+                <input id="Confirmpwd" @bind="@Model.Confirmpwd" class="form-control" />
+                <span class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="Gender" class="control-label">Gender</label>
+                <input id="Gender" @bind="@Model.Gender" class="form-control" />
+                <span class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="Email" class="control-label">Email</label>
+                <input id="Email" @bind="@Model.Email" class="form-control" />
+                <span class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="PhoneNumber" class="control-label">Phone Number</label>
+                <input id="PhoneNumber" @bind="@Model.PhoneNumber" class="form-control" />
+                <span class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a href="/DrugRegistration">Back to List</a>
+</div>
+
+@code {
+    private registration Model { get; set; } = new registration();
+
+    private void Create()
+    {
+        // Handle form submission logic here
+    }
+}
