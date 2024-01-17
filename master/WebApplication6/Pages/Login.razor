@@ -1,0 +1,47 @@
+﻿@page "/login"
+@using WebApplication6.Models
+@using WebApplication6.Services
+@inject NavigationManager NavManager
+<div class="header-w3l">
+    <h1>Drug Management System</h1>
+</div>
+
+<div class="main-w3layouts-agileinfo">
+    <div class="wthree-form">
+        <div id="login">
+            <p> Login Form</p>
+        </div>
+        <EditForm Model="@register" OnValidSubmit="@onsubmit">
+            <div class="form-group" style="margin-top: 10px;">
+                <label for="email">Email</label>
+                <input type="text" class="form-control" id="email" @bind="register.Email" placeholder="Enter your email" required>
+                <ValidationMessage For="@(() => register.username)" class="text-danger" />
+            </div>
+            <div class="form-group" style="margin-top: 10px;">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password" @bind="register.Password" placeholder="Enter your password" required>
+                <ValidationMessage For="@(() => register.Password)" class="text-danger" />
+            </div>
+            <div class="form-group mb-4" style="margin-top: 10px;">
+                <button type="submit" class="btn btn-primary" >
+                    Login
+                </button>
+            </div>
+        </EditForm>
+        <div id="register">
+            <a href="/signup">Not Registered Yet? <br /> Click Here</a>
+        </div>
+    </div>
+
+</div>
+@code {
+    registration register = new registration();
+    public async Task onsubmit()
+    {
+        registration? user = Register.login(register);
+        if (user != null)
+        {
+            NavManager.NavigateTo("/Dashboard");
+        }
+    }
+}

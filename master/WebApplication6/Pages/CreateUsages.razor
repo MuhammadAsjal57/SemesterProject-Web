@@ -1,0 +1,45 @@
+﻿@page "/CreateUsage"
+@using WebApplication6.Controllers
+@using WebApplication6.Models
+@inject NavigationManager NavManager
+@layout Layout2
+<link rel="stylesheet" href="/css/new.css" />
+<h4>Usages</h4>
+<hr />
+<div class="main-w3layouts-agileinfo1">
+    <div class="wthree-form">
+        <form method="post" @onsubmit="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label for="disc" class="control-label">Disc</label>
+                <input id="disc" @bind="@Model.disc" class="form-control" />
+                <span class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="otherdetails" class="control-label">Other Details</label>
+                <input id="otherdetails" @bind="@Model.otherdetails" class="form-control" />
+                <span class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+    <div>
+        <NavLink href="/Usage">Back to List</NavLink>
+    </div>
+</div>
+@code {
+    // Assuming you have a property named Model in the code-behind
+    private usagecs Model { get; set; } = new usagecs();
+
+    private async void Create()
+    {
+        usagecs reponse = await usagecsController.Create(Model);
+        if (reponse != null)
+        {
+            NavManager.NavigateTo("/Usage");
+
+        }
+    }
+}

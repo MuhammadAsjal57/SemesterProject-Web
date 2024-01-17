@@ -1,0 +1,81 @@
+﻿@page "/DrugRegistration"
+@using WebApplication6.Controllers
+@using WebApplication6.Models
+@layout Layout2
+<link rel="stylesheet" href="/css/new.css" />
+
+<div class="main-w3layouts-agileinfo11">
+    <div class="button">
+        <p>
+            <NavLink href="/CreateRegistration">New Record</NavLink>
+        </p>
+    </div>
+
+    <table class="wthree-form">
+        <thead>
+            <tr>
+                <th>
+                    LongName
+                </th>
+                <th>
+                    ShortName
+                </th>
+                <th>
+                    Desc
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+         @if (DrugList.Count>0)
+         {   
+        <tbody>
+           
+            @foreach (var item in DrugList)
+            {
+                <tr>
+                    <td>
+                        @item.longName
+                    </td>
+                    <td>
+                        @item.shortName
+                    </td>
+                    <td>
+                        @item.disc
+                    </td>
+
+
+                    <td>
+                            <button type="button" class="btn btn-primary" @onclick=" ()=> OnDelete(item.drugID)">
+                                Delete
+                            </button>
+                    </td>
+                </tr>
+            }
+       
+            
+        </tbody>
+        }
+        else
+        {
+            <h3>Loading....</h3>
+        }
+    </table>
+</div>
+@code {
+    // Assuming you have a property named EmployeeList in the code-behind
+    private List<drug> DrugList { get; set; } = new List<drug>();
+
+    protected override async void OnInitialized()
+    {
+        DrugList =await drugsController.Index();
+        base.OnInitialized();
+        StateHasChanged();
+    }
+    public async void OnDelete(int id)
+    {
+        await drugsController.DeleteConfirmed(id);  
+
+        StateHasChanged();
+    }
+}
+

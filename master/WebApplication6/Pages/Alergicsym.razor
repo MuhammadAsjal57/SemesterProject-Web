@@ -1,0 +1,77 @@
+﻿@page "/AlergicSymp"
+@using WebApplication6.Controllers
+@using WebApplication6.Models
+@layout Layout2
+<link rel="stylesheet" href="/css/new.css" />
+
+
+<div class="main-w3layouts-agileinfo11">
+    <div class="button">
+        <p>
+            <NavLink href="/CreateAllergicSymp">New Record</NavLink>
+        </p>
+    </div>
+
+    <table class="wthree-form">
+        <thead>
+            <tr>
+                <th>
+                    name
+                </th>
+                <th>
+                    desc
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        @if (alergicList != null)
+        {
+            @if (alergicList.Count > 0)
+            {
+                <tbody>
+                @foreach (var item in alergicList)
+                {
+                    <tr>
+                        <td>
+                            @item.Name
+                        </td>
+                        <td>
+                            @item.disc
+                        </td>
+                        <td>
+                                <button type="button" class="btn btn-primary" @onclick=" ()=> OnDelete(item.drugID)">
+                                    Delete
+                                </button>
+                        </td>
+                    </tr>
+                }
+               </tbody>
+        }
+        else
+        {
+            <h3>List is empty....</h3>
+        }
+        }
+        else
+        {
+            <h3>Loading....</h3>
+        }
+    </table>
+</div>
+@code {
+    // Assuming you have a property named EmployeeList in the code-behind
+    private List<alergic> alergicList { get; set; } = new List<alergic>();
+    protected override async void OnInitialized()
+    {
+        alergicList = await alergicsController.Index();
+        base.OnInitialized();
+        StateHasChanged();
+    }
+    public async void OnDelete(int id)
+    {
+        await alergicsController.DeleteConfirmed(id);
+
+        StateHasChanged();
+    }
+}
+

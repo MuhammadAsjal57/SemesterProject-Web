@@ -1,0 +1,86 @@
+﻿@page "/Create"
+@using WebApplication6.Controllers
+@using WebApplication6.Models
+@layout Layout2
+@inject NavigationManager NavManager
+<link rel="stylesheet" href="/css/new.css" />
+<h4>Employee</h4>
+<hr />
+
+<div class="main-w3layouts-agileinfo1">
+    <div class="wthree-form">
+        <EditForm Model="@CreateModel" OnValidSubmit="@Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label for="empName" class="control-label">Employee Name</label>
+                <input type="text" @bind="@CreateModel.empName" class="form-control" />
+                <ValidationMessage For="@(() => CreateModel.empName)" class="text-danger" />
+            </div>
+
+            <div class="form-group">
+                <label for="date" class="control-label">Date</label>
+                <input type="datetime" t @bind="@CreateModel.date" class="form-control" />
+                <ValidationMessage For="@(() => CreateModel.date)" class="text-danger" />
+            </div>
+
+            <div class="form-group">
+                <label for="Gender" class="control-label">Gender</label>
+                <input type="text" @bind="@CreateModel.Gender" class="form-control" />
+                <ValidationMessage For="@(() => CreateModel.Gender)" class="text-danger" />
+            </div>
+
+            <div class="form-group">
+                <label for="Email" class="control-label">Email</label>
+                <input type="email" @bind="@CreateModel.Email" class="form-control" />
+                <ValidationMessage For="@(() => CreateModel.Email)" class="text-danger" />
+            </div>
+
+            <div class="form-group">
+                <label for="PhoneNumber" class="control-label">Phone Number</label>
+                <input type="number" @bind="@CreateModel.PhoneNumber" class="form-control" />
+                <ValidationMessage For="@(() => CreateModel.PhoneNumber)" class="text-danger" />
+            </div>
+
+            <div class="form-group">
+                <label for="datejoin" class="control-label">Date Join</label>
+                <input type="datetime" @bind="@CreateModel.datejoin" class="form-control" />
+                <ValidationMessage For="@(() => CreateModel.datejoin)" class="text-danger" />
+            </div>
+
+            <div class="form-group">
+                <label for="dept" class="control-label">Department</label>
+                <input type="text" @bind="@CreateModel.dept" class="form-control" />
+                <ValidationMessage For="@(() => CreateModel.dept)" class="text-danger" />
+            </div>
+
+            <div class="form-group">
+                <label for="designationn" class="control-label">Designation</label>
+                <input type="text" @bind="@CreateModel.designationn" class="form-control" />
+                <ValidationMessage For="@(() => CreateModel.designationn)" class="text-danger" />
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Create</button>
+            </div>
+        </EditForm>
+    </div>
+
+    <div>
+        <NavLink href="/employes">Back to List</NavLink>
+    </div>
+</div>
+@code {
+    // Assuming you have a property named CreateModel in the code-behind
+    private employe CreateModel= new employe();
+
+    private async void Create()
+    {
+        employe drugreponse = await employesController.Create(CreateModel);
+        if (drugreponse != null)
+        {
+            NavManager.NavigateTo("/employes");
+
+        }
+    }
+}

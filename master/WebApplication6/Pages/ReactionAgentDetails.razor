@@ -1,0 +1,84 @@
+﻿@page "/Agent"
+@using WebApplication6.Controllers
+@using WebApplication6.Models
+@layout Layout2
+<link rel="stylesheet" href="/css/new.css" />
+
+<div class="main-w3layouts-agileinfo11">
+    <div class="button">
+        <p>
+            <NavLink href="/CreateAgent">New Record</NavLink>
+        </p>
+    </div>
+
+    <table class="wthree-form">
+        <thead>
+            <tr>
+                <th>
+                    shortName
+                </th>
+                <th>
+                    longName
+                </th>
+                <th>
+                    disc
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        @if(EmployeeList!=null){
+        @if (EmployeeList.Count > 0)
+        {
+            <tbody>
+                @foreach (var item in EmployeeList)
+                {
+                    <tr>
+                        <td>
+                            @item.longName
+                        </td>
+                        <td>
+                            @item.shortName
+                        </td>
+                        <td>
+                            @item.disc
+                        </td>
+
+                        <td>
+                            <button type="button" class="btn btn-primary" @onclick=" ()=> OnDelete(item.reactionID)">
+                                Delete
+                            </button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        }
+        else
+            {
+                <h3>List is empty....</h3>
+            }
+
+        }
+        else
+        {
+            <h3>Loading....</h3>
+        }
+
+    </table>
+</div>
+@code {
+    // Assuming you have a property named EmployeeList in the code-behind
+    private List<agent> EmployeeList { get; set; } = new List<agent>();
+    protected override async void OnInitialized()
+    {
+        EmployeeList = await agentsController.Index();
+        base.OnInitialized();
+        StateHasChanged();
+    }
+    public  async void OnDelete(int id)
+    {
+        await agentsController.DeleteConfirmed(id);
+
+        StateHasChanged();
+    }
+}
+

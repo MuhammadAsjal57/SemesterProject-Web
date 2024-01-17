@@ -1,0 +1,114 @@
+﻿@page "/employes"
+@using WebApplication6.Controllers
+@using WebApplication6.Models
+@layout Layout2
+<link rel="stylesheet" href="/css/new.css" />
+<div class="texth">
+    <h1>Employee Details</h1>
+</div>
+
+<div class="main-w3layouts-agileinfo11">
+    <div class="button">
+        <p>
+            <NavLink href="/Create">New Record</NavLink>
+        </p>
+    </div>
+
+    <table class="wthree-form">
+        <thead>
+            <tr>
+                <th>
+                   Name
+                </th>
+                <th>
+                    Date
+                </th>
+                <th>
+                   Gender
+                </th>
+                <th>
+                   Email
+                </th>
+                <th>
+                   Phone No
+                </th>
+                <th>
+                  Date Join
+                </th>
+                <th>
+                    Department
+                </th>
+                <th>
+                    Designation
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        @if (EmployeeList != null)
+        {
+            @if (EmployeeList.Count > 0){
+                <tbody>
+                @foreach (var item in EmployeeList)
+                {
+                    <tr>
+                        <td>
+                            @item.empName
+                        </td>
+                        <td>
+                            @item.date
+                        </td>
+                        <td>
+                            @item.Gender
+                        </td>
+                        <td>
+                            @item.Email
+                        </td>
+                        <td>
+                            @item.PhoneNumber
+                        </td>
+                        <td>
+                            @item.datejoin
+                        </td>
+                        <td>
+                            @item.dept
+                        </td>
+                        <td>
+                            @item.designationn
+                        </td>
+                        <td>
+                                <button type="button" class="btn btn-primary" @onclick=" ()=> OnDelete(item.empID)">
+                                    Delete
+                                </button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        }
+        else
+        {
+            <h3>List is empty....</h3>
+        }
+        }
+        else
+        {
+            <h3>Loading....</h3>
+        }
+    </table>
+</div>
+@code {
+    // Assuming you have a property named EmployeeList in the code-behind
+    private List<employe> EmployeeList { get; set; } = new List<employe>();
+    protected override async void OnInitialized()
+    {
+        EmployeeList = await employesController.Index();
+        base.OnInitialized();
+        StateHasChanged();
+    }
+    public async void OnDelete(int id)
+    {
+        await employesController.DeleteConfirmed(id);
+
+        StateHasChanged();
+    }
+}
+

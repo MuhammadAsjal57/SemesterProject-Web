@@ -1,0 +1,52 @@
+﻿@page "/CreateRegistration"
+@using WebApplication6.Controllers
+@using WebApplication6.Models
+@inject NavigationManager NavManager
+@layout Layout2
+<link rel="stylesheet" href="/css/new.css" />
+
+<h4>Create Registration</h4>
+<hr />
+
+<div class="row">
+    <div class="col-md-4">
+        <form method="post" @onsubmit="Create">
+            <div class="form-group">
+                <label for="LongName" class="control-label">Long Name</label>
+                <input id="FirstName" @bind="@Model.longName" class="form-control" />
+                <span class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="ShortName" class="control-label">Short Name</label>
+                <input id="LastName" @bind="@Model.shortName" class="form-control" />
+                <span class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="Desc" class="control-label">Desc</label>
+                <input id="Password" @bind="@Model.disc" class="form-control" />
+                <span class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a href="/DrugRegistration">Back to List</a>
+</div>
+
+@code {
+    private drug Model { get; set; } = new drug();
+
+    private async void Create()
+    {
+        drug drugreponse = await drugsController.Create(Model);
+        if (drugreponse != null)
+        {
+            NavManager.NavigateTo("/DrugRegistration");
+
+        }
+    }
+}
